@@ -9,10 +9,7 @@ import ItemListContainerMusicBox from "./components/item-list-container/item-lis
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <NavBarMusicBox />
-      <ItemListContainerMusicBox title={"Bienvenido!"}
-                                 grettings={"Pronto encontrarás aqui todo lo que necesitas para tu carrera musical en un " +
-                                     "solo lugar!!!"}/>
+    <App />
   </React.StrictMode>
 );
 reportWebVitals();
