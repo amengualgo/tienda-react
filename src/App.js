@@ -2,7 +2,7 @@ import NavBarMusicBox from "./components/nav-bar/nav-bar";
 import ItemListContainerMusicBox from "./components/item-list-container/item-list-container";
 import React from "react";
 
-function BasicExample() {
+function AppComponent() {
     return (
         <>
             <NavBarMusicBox />
@@ -13,4 +13,4 @@ function BasicExample() {
     );
 }
 
-export default BasicExample;
+export default AppComponent;
