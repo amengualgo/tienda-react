@@ -28,6 +28,10 @@
   color: #61dafb;
 }
 
+.dropdown-item.active, .dropdown-item:active {
+  background-color: #463723 !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +39,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: #463723 !important;
+}
+
+
+.dropdown-item.active, .dropdown-item:active {
+  color: antiquewhite;
+  text-decoration: none;
+  background-color: #463723 !important;
 }
