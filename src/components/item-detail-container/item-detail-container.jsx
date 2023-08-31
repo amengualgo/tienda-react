@@ -18,7 +18,7 @@ function ItemListContainerMusicBox(){
                         <Card.Body key={`CardBody_${product.id}`}>
                             <Card.Title key={`CardTitle_${product.id}`}>{product.nombre}</Card.Title>
                             <Card.Text key={`CardTextVal_${product.id}`}>$ {product.valor}</Card.Text>
-                            <ItemCountMusicBox min={1} max={10}/>
+                            <ItemCountMusicBox min={1} max={product.stock}/>
                             <Card.Text key={`CardTextDes_${product.id}`}>{product.descripcion}</Card.Text>
                             <Link to={'/'}>
                                 <Button key={`Button_${product.id}`} variant="primary">Volver</Button>
