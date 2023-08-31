@@ -1,22 +1,10 @@
 import {Button, Card } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {Link, useParams} from "react-router-dom";
-import data from "../../data/data.json";
-import {useEffect, useState} from "react";
+import {useElementsByCategory} from "../../hooks/useElementsByCategoria";
 function ItemListContainerMusicBox(){
-    const [products, setProducts] = useState([]);
     const { categoryId } = useParams();
-
-    useEffect(() =>{
-        if(categoryId){
-            const productsByCategory = data.filter(
-                product =>  product.categoria === categoryId
-            )
-            setProducts(productsByCategory)
-        }else{
-            setProducts(data);
-        }
-    }, [categoryId])
+    const products = useElementsByCategory(categoryId);
 
     return(
         <Container className="productos d-flex flex-wrap">
@@ -28,7 +16,7 @@ function ItemListContainerMusicBox(){
                             <Card.Title key={`CardTitle_${index}`}>{producto.nombre}</Card.Title>
                             <Card.Text key={`CardText_${index}`}>{producto.precio}</Card.Text>
                             <Link to={`/item/${producto.id}`}>
-                                <Button key={`Button_${index}`} variant="primary">Detalle</Button>
+                                <Button key={`Button_${index}`} variant="primary">Ver mas</Button>
                             </Link>
 
                         </Card.Body>

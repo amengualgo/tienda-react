@@ -6,14 +6,11 @@ import logoMusic_128 from '../../assets/logoMusic_128.png'
 import CartWidgetMusicBox from "../cart-widget/cart-widget";
 import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
 import Error404 from "../error-404/error-404";
-import data from "../../data/data.json";
 import ItemListContainer from "../item-list-container/item-list-container";
 import ItemDetailContainer from "../item-detail-container/item-detail-container";
-
+import {useCategories} from "../../hooks/useCategorias";
 function NavBarMusicBox() {
-    const categories = data.map(producto => producto.categoria);
-    const categoriesMenu = [... new Set(categories.sort())];
-
+    const categoriesMenu = useCategories();
     return (
         <BrowserRouter>
             <Navbar expand="lg" className="bg-body-tertiary">
@@ -56,5 +53,4 @@ function NavBarMusicBox() {
         </BrowserRouter>
     );
 }
-
 export default NavBarMusicBox;

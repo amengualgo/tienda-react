@@ -1,22 +1,14 @@
 import {Button, Card} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {Link, useParams} from "react-router-dom";
-import data from "../../data/data.json";
-import {useEffect, useState} from "react";
 import Error404 from "../error-404/error-404";
+import {useElementById} from "../../hooks/useElementById";
+import ItemCountMusicBox from "../item-count/item-count";
+
+
 function ItemListContainerMusicBox(){
-    const [product, setProduct] = useState(null);
     const { id } = useParams();
-
-    useEffect(() =>{
-        if(id){
-            const productsById= data.filter(
-                product =>  product.id === Number(id)
-            )[0]
-            setProduct(productsById)
-        }
-    }, [id])
-
+    const product = useElementById(id);
     return(
         <Container className="productos d-flex flex-wrap">
             {
@@ -25,7 +17,9 @@ function ItemListContainerMusicBox(){
                         <Card.Img style={{width:"100px"}} key={`CardImg_${product.id}`} variant="top" src={product.imagen} />
                         <Card.Body key={`CardBody_${product.id}`}>
                             <Card.Title key={`CardTitle_${product.id}`}>{product.nombre}</Card.Title>
-                            <Card.Text key={`CardText_${product.id}`}>{product.precio}</Card.Text>
+                            <Card.Text key={`CardTextVal_${product.id}`}>$ {product.valor}</Card.Text>
+                            <ItemCountMusicBox min={1} max={10}/>
+                            <Card.Text key={`CardTextDes_${product.id}`}>{product.descripcion}</Card.Text>
                             <Link to={'/'}>
                                 <Button key={`Button_${product.id}`} variant="primary">Volver</Button>
                             </Link>
