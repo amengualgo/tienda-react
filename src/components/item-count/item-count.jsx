@@ -20,6 +20,8 @@ function ItemCountMusicBox(props){
                     <span style={{paddingInline:"10px"}}>{amount}</span>
                     <Button className={"btn-danger"} style={{width:"30px", height:"30px", padding:"0px"}}
                             onClick={increaseAmount} >+</Button>
+                    <Button className={"btn-success"} style={{margin:"5px", height:"30px", paddingTop:"0px", paddingBottom:"0px", paddingLeft:"3px", paddingRight:"3px"}}
+                            >Agregar al carrito</Button>
                 </Col>
             </Row>
         </Container>
