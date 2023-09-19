@@ -4,11 +4,18 @@ import {Link, useParams} from "react-router-dom";
 import Error404 from "../error-404/error-404";
 import {useElementById} from "../../hooks/useElementById";
 import ItemCountMusicBox from "../item-count/item-count";
+import {useContext} from "react";
+import {CartContext} from "../../contexts/cart-context";
 
 
-function ItemListContainerMusicBox(){
+function ItemDetailContainerMusicBox(){
     const { id } = useParams();
     const product = useElementById(id);
+    const addItem = useContext(CartContext);
+    const onAdd = (amount)=>{
+        addItem(amount, product)
+    };
+
     return(
         <Container className="productos d-flex flex-wrap">
             {
@@ -18,7 +25,7 @@ function ItemListContainerMusicBox(){
                         <Card.Body key={`CardBody_${product.id}`}>
                             <Card.Title key={`CardTitle_${product.id}`}>{product.nombre}</Card.Title>
                             <Card.Text key={`CardTextVal_${product.id}`}>$ {product.valor}</Card.Text>
-                            <ItemCountMusicBox min={1} max={product.stock}/>
+                            <ItemCountMusicBox min={1} max={product.stock} onAdd={onAdd}/>
                             <Card.Text key={`CardTextDes_${product.id}`}>{product.descripcion}</Card.Text>
                             <Link to={'/'}>
                                 <Button key={`Button_${product.id}`} variant="primary">Volver</Button>
@@ -30,4 +37,4 @@ function ItemListContainerMusicBox(){
     );
 }
 
-export default ItemListContainerMusicBox
+export default ItemDetailContainerMusicBox
