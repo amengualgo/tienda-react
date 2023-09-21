@@ -12,7 +12,7 @@ import LoadingPane from "../loading-pane/loading-pane";
 function ItemDetailContainerMusicBox(){
     const { id } = useParams();
     const product = useElementById(id);
-    const addItem = useContext(CartContext);
+    const {addItem} = useContext(CartContext);
     const onAdd = (amount)=>{
         addItem(amount, product)
     };
@@ -23,7 +23,7 @@ function ItemDetailContainerMusicBox(){
 
     return(
 
-        <Container className="productos d-flex flex-wrap">
+        <Container className="d-flex flex-wrap">
             {
                 product.id ?
                     <Card key={`Card_${product.id}`} style={{ width: '18rem', margin:"2px" }}>

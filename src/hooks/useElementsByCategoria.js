@@ -9,7 +9,6 @@ export  const useElementsByCategory = (categoria) => {
             if(categoria) {
                 await getElementsByCategory(categoria).then(
                     function (value) {
-                        console.log(value);
                         if (value)
                             setElements(value)
                     },
