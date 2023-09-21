@@ -1,7 +1,6 @@
-import data from '../data/data.json'
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
 
+import { initializeApp } from "firebase/app";
+import  { getFirestore, getDocs, collection, query, where } from "firebase/firestore"
 const firebaseConfig = {
     apiKey: "AIzaSyDhfASRBQRAZHW-DCEaDA8-mCwtWcGclXs",
     authDomain: "musicboxstore-23a50.firebaseapp.com",
@@ -13,34 +12,56 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
-
+const db = getFirestore();
 export const getCategories = () => {
     return new Promise((resolve, reject) => {
-        const categories = data.map(producto => producto.categoria);
-        const categoriesMenu = [... new Set(categories.sort())];
+        let categories = [];
+        const categoriesMenu = getDocs(collection(db, 'products')).then((snapshot=>{
+            snapshot.docs.map(value => {categories.push(value.data().categoria)});
+            return [... new Set(categories.sort())];
+        }));
         resolve(categoriesMenu)
         reject([])
     });
 }
 export const getElementsByCategory = (category) => {
-    return new Promise((resolve, reject) => {
-        const elements = data.filter(product =>  product.categoria === category)
-        resolve(elements)
+    return new Promise(async (resolve, reject) => {
+        let elements = [];
+        const q = query(collection(db, "products"), where("categoria", "==", category));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            elements.push(doc.data());
+        });
+        resolve(elements);
         reject([])
     });
 }
 export const getAllElements = () => {
-    return new Promise((resolve, reject) => {
-        const elements = data
+    return new Promise(async (resolve, reject) => {
+        let elements = [];
+        await getDocs(collection(db, 'products')).then((snapshot => {
+            snapshot.docs.map(value => elements.push(value.data()));
+        }));
         resolve(elements)
         reject([])
     });
 }
 export const getElementById = (id) => {
-    return new Promise((resolve, reject) => {
-        const element = data.find(product =>  product.id === Number(id))
-        resolve(element)
-        reject({})
+    return new Promise(async (resolve, reject) => {
+        try {
+            let element = {};
+            const q = query(collection(db, "products"), where("id", "==", Number(id)));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+               element = doc.data();
+            });
+            resolve(element)
+            reject({})
+        } catch (e) {
+            console.log(e);
+            return {}
+        }
+
     });
 }
 

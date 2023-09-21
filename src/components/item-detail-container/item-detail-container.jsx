@@ -6,6 +6,7 @@ import {useElementById} from "../../hooks/useElementById";
 import ItemCountMusicBox from "../item-count/item-count";
 import {useContext} from "react";
 import {CartContext} from "../../contexts/cart-context";
+import LoadingPane from "../loading-pane/loading-pane";
 
 
 function ItemDetailContainerMusicBox(){
@@ -16,10 +17,15 @@ function ItemDetailContainerMusicBox(){
         addItem(amount, product)
     };
 
+    if(!product){
+        return (<LoadingPane />)
+    }
+
     return(
+
         <Container className="productos d-flex flex-wrap">
             {
-                product ?
+                product.id ?
                     <Card key={`Card_${product.id}`} style={{ width: '18rem', margin:"2px" }}>
                         <Card.Img style={{width:"100px"}} key={`CardImg_${product.id}`} variant="top" src={product.imagen} />
                         <Card.Body key={`CardBody_${product.id}`}>

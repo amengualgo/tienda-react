@@ -9,8 +9,9 @@ export  const useElementsByCategory = (categoria) => {
             if(categoria) {
                 await getElementsByCategory(categoria).then(
                     function (value) {
+                        console.log(value);
                         if (value)
-                            setElements([...value]);
+                            setElements(value)
                     },
                     function (error) {
                         throw  error;
@@ -20,7 +21,7 @@ export  const useElementsByCategory = (categoria) => {
                 await getAllElements().then(
                     function (value) {
                         if (value)
-                            setElements([...value]);
+                            setElements(value)
                     },
                     function (error) {
                         throw  error;
