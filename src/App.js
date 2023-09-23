@@ -5,6 +5,7 @@ import ItemListContainer from "./components/item-list-container/item-list-contai
 import ItemDetailContainer from "./components/item-detail-container/item-detail-container";
 import Error404 from "./components/error-404/error-404";
 import CartProviderMusicBox from "./contexts/cart-context";
+import CheckOutMusicBox from "./components/checkout/checkout-brief";
 
 function AppComponent() {
     return (
@@ -19,6 +20,7 @@ function AppComponent() {
                         <Route path="/item/:id" element={<ItemDetailContainer />} />
                         <Route path="/escuela" element={<></>} />
                         <Route path="/eventos" element={<></>} />
+                        <Route path="/check-out" element={<CheckOutMusicBox />} />
                         <Route path="*" element={<Error404 />} />
                     </Routes>
                 </BrowserRouter>

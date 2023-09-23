@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import  { getFirestore, getDocs, collection, query, where } from "firebase/firestore"
+import  { getFirestore, getDocs, collection, query, where, addDoc } from "firebase/firestore"
 const firebaseConfig = {
     apiKey: "AIzaSyDhfASRBQRAZHW-DCEaDA8-mCwtWcGclXs",
     authDomain: "musicboxstore-23a50.firebaseapp.com",
@@ -63,5 +63,17 @@ export const getElementById = (id) => {
         }
 
     });
+}
+export const savePedido=async (pedido) => {
+    debugger
+    let idPedido = -1;
+    const orderCollection = collection(db, "pedidos");
+    await addDoc(orderCollection, pedido).then(({id}) => {
+        if (id) {
+            idPedido = id;
+        } else
+            idPedido = -1;
+    })
+    return idPedido;
 }
 
