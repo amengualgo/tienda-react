@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/Container";
 import {Button, Col, Row} from "react-bootstrap";
 import { useState} from "react";
+import Swal from "sweetalert2";
 
 
 function ItemCountMusicBox(props){
@@ -15,6 +16,7 @@ function ItemCountMusicBox(props){
     }
 
 
+
     return(
         <Container style={{padding:"0px"}}>
             <Row>
@@ -25,7 +27,23 @@ function ItemCountMusicBox(props){
                     <Button className={"btn-danger"} style={{width:"30px", height:"30px", padding:"0px"}}
                             onClick={increaseAmount} >+</Button>
                     <Button className={"btn-success"} style={{margin:"5px", height:"30px", paddingTop:"0px",
-                        paddingBottom:"0px", paddingLeft:"3px", paddingRight:"3px" }} onClick={()=>{onAdd(amount)}}
+                        paddingBottom:"0px", paddingLeft:"3px", paddingRight:"3px" }} onClick={()=>{
+                        Swal.fire({
+                            title: '¿Está seguro de adicionar al carrito?',
+                            showDenyButton: true,
+                            showCancelButton: false,
+                            confirmButtonText: 'Si, guardar!',
+                            denyButtonText: `No`,
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                onAdd(amount);
+                                Swal.fire('Elemento adicionado!', '', 'success');
+                            } else if (result.isDenied) {
+                                Swal.fire('Elemento descartado', '', 'info')
+                            }
+                        })
+                        }}
                             >Agregar al carrito</Button>
                 </Col>
             </Row>

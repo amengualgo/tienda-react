@@ -10,8 +10,9 @@ function CartProviderMusicBox({children}){
     const addItem=(amount, product)=>{
         /*buscar si el elemento existe ya en el carrito*/
         let indexFound = items.findIndex(value => Number(value.id) == Number(product.id));
+
         if(indexFound>=0){
-            items[indexFound].amount = amount;
+            items[indexFound].amount += amount;
         }else{
             product.amount = amount;
             items.push(product);
@@ -20,7 +21,6 @@ function CartProviderMusicBox({children}){
         items.map(value => _cantidadTotal=_cantidadTotal + value.amount);
         setCantidadTotal(_cantidadTotal);
         setItems(items);
-        console.log(items);
     };
     return(
         <CartContext.Provider value={{addItem:addItem,cantidadTotal:cantidadTotal}} >
